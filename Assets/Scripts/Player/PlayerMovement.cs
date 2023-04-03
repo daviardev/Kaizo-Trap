@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour {
 	// jump
 	private bool isJumpCut;
 	private bool isJumpFalling;
-	public bool isRunning;
 
 	// wall Jump
 	private int lastWallJumpDir;
@@ -200,7 +199,6 @@ public class PlayerMovement : MonoBehaviour {
 	}
     #endregion
 
-	// movement methods
     #region Run methods
     private void Run(float lerpAmount) {
     // calculate the direction we want to move in and our desired velocity
