@@ -207,14 +207,14 @@ public class PlayerMovement : MonoBehaviour {
     // check if the "X" key is pressed and set the target speed to the fast run max speed if it is
     if (Input.GetKey(KeyCode.X)) {
         Data.fastRunTimer += Time.deltaTime;
-        if (Data.fastRunTimer > .3f) { // wait for half a second before increasing speed
-            targetSpeed = moveInput.x * Data.fastRunMaxSpeed * 1.5f; // increase speed by 1.5f
-		if (Data.fastRunTimer > .7f) {
-			targetSpeed = moveInput.x * Data.fastRunMaxSpeed * 1.9f;
+        if (Data.fastRunTimer > .0f) { // wait for half a second before increasing speed
+            targetSpeed = moveInput.x * Data.fastRunMaxSpeed * 1.2f; // increase speed by 1.5f
+		if (Data.fastRunTimer > .6f) {
+			targetSpeed = moveInput.x * Data.fastRunMaxSpeed * 1.4f;
 		}
         }
     } else {
-        Data.fastRunTimer = 0f;
+        Data.fastRunTimer = .0f;
     }
 
     // lerp to the target speed
