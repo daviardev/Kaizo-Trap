@@ -3,23 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
-    #region Layers
-    private Dictionary<string, int> layerMap = new Dictionary<string, int>();
-
-    private void Awake() {
-        // map name the layers to yours index
-        layerMap.Add("Shell", LayerMask.NameToLayer("Shell"));
-        layerMap.Add("Ground", LayerMask.NameToLayer("Ground"));
-        layerMap.Add("Player", LayerMask.NameToLayer("Player"));
-        layerMap.Add("GrabShell", LayerMask.NameToLayer("GrabShell"));
+   public enum Layers {
+        player = 7,
+        ground = 3,
+        shell = 6,
+        grabShell = 8
     }
-    #endregion
 
-    private void Start() {
-        #region Ignore collisions
-        Physics2D.IgnoreLayerCollision(layerMap["Player"], layerMap["Shell"], true);
-        Physics2D.IgnoreLayerCollision(layerMap["GrabShell"], layerMap["Shell"], true);
-        Physics2D.IgnoreLayerCollision(layerMap["GrabShell"], layerMap["Ground"], true);
-        #endregion
+    private int[,] LayerCollisionToIgnore = new int[,] {
+        {(int) Layers.player, (int) Layers.shell},
+        {(int) Layers.grabShell, (int) Layers.ground},
+        {(int) Layers.grabShell, (int) Layers.shell}
+    };
+
+    void Start() {
+        for (int i = 0; i < LayerCollisionToIgnore.GetLength(0); i++) {
+            Physics2D.IgnoreLayerCollision(LayerCollisionToIgnore[i, 0], LayerCollisionToIgnore[i, 1], true);
+        }
     }
 }
